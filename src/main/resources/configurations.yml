@@ -3,10 +3,10 @@ ad-timer: 20 # Tempo entre as mensagens em segundos
 cost: 1000 # Preço para participar
 
 Messages:
-  closed: "&c" # Evento está fechado
-  insufficient-money: "&c" # Não tem dinheiro suficiente
-  participating: "&c" # Participando
-  already-participating: "&C" # Quando já está participando
+  closed: "&cthe event is closed" # Evento está fechado
+  insufficient-money: "&cyou do not have enough money" # Não tem dinheiro suficiente
+  participating: "&aAre you participating in the ballon" # Participando
+  already-participating: "&CYou are already participating in the event" # Quando já está participando
   insuffient-players: "&cNot enough players"
 notice-start:
   - ""
