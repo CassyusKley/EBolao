@@ -1,0 +1,18 @@
+ad-quantity: 20 # Quantidade de anuncios
+ad-timer: 20 # Tempo entre as mensagens em segundos
+cost: 1000 # Preço para participar
+
+Messages:
+  closed: "&c" # Evento está fechado
+  insufficient-money: "&c" # Não tem dinheiro suficiente
+  participating: "&c" # Participando
+  already-participating: "&C" # Quando já está participando
+notice-start:
+  - ""
+  - "&fEvento bolao ocorrendo!"
+  - "&fValor da aposta: $<cost>"
+  - "&fPremio acumulado: $<cumulative_cost>"
+  - "&fJogadors participando: <amount-player>"
+  - "&fPara participar, utilize /bolao"
+  - "&fanuncios restantes: <ad-quantity>"
+  - ""

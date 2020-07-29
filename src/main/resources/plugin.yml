@@ -1,0 +1,6 @@
+name: EBolao
+version: ${project.version}
+main: etiocook.ebolao.Main
+depend: [Vault]
+authors: [eTioCooK]
+description: simples plugin bolao event

@@ -1,0 +1,6 @@
+name: EBolao
+version: 1.0-SNAPSHOT
+main: etiocook.ebolao.Main
+depend: [Vault]
+authors: [eTioCooK]
+description: simples plugin bolao event
