@@ -7,6 +7,7 @@ Messages:
   insufficient-money: "&c" # Não tem dinheiro suficiente
   participating: "&c" # Participando
   already-participating: "&C" # Quando já está participando
+  insuffient-players: "&cNot enough players"
 notice-start:
   - ""
   - "&fEvento bolao ocorrendo!"

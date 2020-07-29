@@ -23,22 +23,29 @@ public final class Main extends JavaPlugin {
     public static Main getInstance() {
         return getPlugin(Main.class);
     }
+
     public List<String> getNames() {
         return names;
     }
+
     public boolean state = false;
+
     public CiberConfig getConfigurations() {
         return configurations;
     }
+
     public void setConfigurations(CiberConfig configurations) {
         this.configurations = configurations;
     }
+
     public boolean isState() {
         return state;
     }
+
     public void setState(boolean state) {
         this.state = state;
     }
+
     public Economy getEconomy() {
         return econ;
     }
@@ -49,7 +56,6 @@ public final class Main extends JavaPlugin {
         setConfigurations(new CiberConfig(this, "configurations.yml"));
         configurations.saveDefaultConfig();
 
-        checkTimer();
         autostart();
         setupEconomy();
     }
@@ -74,21 +80,25 @@ public final class Main extends JavaPlugin {
 
             notice(counter, cumulative_cost);
             if (counter.decrementAndGet() == 0) {
-                //Bukkit.getOnlinePlayers().forEach(onlinePlayer -> onlinePlayer.sendMessage("§eWinner §f" + getWinner()));
+
+                Bukkit.getOnlinePlayers().forEach(onlinePlayer -> onlinePlayer.sendMessage("§eWinner §f" + getWinner()));
+                getEconomy().depositPlayer(getWinner(),cumulative_cost);
+
                 scheduler.cancel();
-
+                setState(false);
                 if (names.size() <= 1) {
-                    Bukkit.broadcastMessage("VAZIO");
+                    Bukkit.getOnlinePlayers().forEach(onlinePlayer -> onlinePlayer.sendMessage(
+                            getConfigurations().getString("insuffient-players")));
 
-                    return;
+                    getEconomy().depositPlayer(names.get(1), cumulative_cost);
                 }
-                Bukkit.getConsoleSender().sendMessage("mickey é gay");
+
             }
         }, ad_timer, ad_timer);
 
     }
 
-    public void autostart (){
+    public void autostart() {
 
         new BukkitRunnable() {
             @Override
@@ -98,27 +108,31 @@ public final class Main extends JavaPlugin {
             }
         }.runTaskTimer(this, 600, 600);
     }
+
     private void notice(AtomicInteger counter, int cumulative_cost) {
         List<String> notice_start = configurations.getConfiguration().getStringList("notice-start");
         notice_start.forEach(
                 msg -> Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', msg
-                        .replace("<ad-quantity>" ,"" + counter.get())
+                        .replace("<ad-quantity>", "" + counter.get())
                         .replace("<amount-player>", "" + names.size())
-                        .replace("<cumulative_cost>" , "" + cumulative_cost)
+                        .replace("<cumulative_cost>", "" + cumulative_cost)
                         .replace("<cost>", "" + getConfigurations().getInt("cost"))))
         );
     }
 
-    private boolean setupEconomy() {
+    private void setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
+            return;
         }
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
-            return false;
+            return;
         }
         econ = rsp.getProvider();
-        return econ != null;
+    }
+
+    public String colorize(String string) {
+        return ChatColor.translateAlternateColorCodes('&', string);
     }
 
 /*    private void notice(String path,) {
